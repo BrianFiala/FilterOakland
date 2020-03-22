@@ -1,6 +1,7 @@
 voters.json
 .idea/
-raw_data/**/*
+src_data/**/*
+results/**/*
 .DS_Store
 *.code-workspace
 
