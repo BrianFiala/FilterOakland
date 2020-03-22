@@ -1,5 +1,8 @@
 voters.json
 .idea/
+raw_data/**/*
+.DS_Store
+*.code-workspace
 
 # Logs
 logs
