@@ -2,6 +2,8 @@ voters.json
 .idea/
 src_data/**/*
 results/**/*
+results.zip
+.vscode/
 .DS_Store
 *.code-workspace
 

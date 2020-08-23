@@ -79,8 +79,8 @@ for (const owner of owners) {
       const voterHouseNumber = voter['house_number'].trim().toUpperCase();
       const voterStreet = voter['street'].trim().toUpperCase();
       const voterMailAddress = voter['mail_street'].trim().toUpperCase();
-      const voterZipCode = voter['zip'].trim().substring(0,5).toUpperCase();
-      const voterMailZipCode = voter['mail_zip'].trim().substring(0,5).toUpperCase();
+      const voterZipCode = voter['zip'].trim().substring(0, 5).toUpperCase();
+      const voterMailZipCode = voter['mail_zip'].trim().substring(0, 5).toUpperCase();
 
       const ownerMatchesLastName = ownerNameMatchesVoterLastName(ownerName, voterLastName);
       const ownerMatchesFirstName = ownerNameMatchesVoterFirstName(ownerName, voterFirstName);
@@ -102,12 +102,12 @@ for (const owner of owners) {
           'OWNER type' : owner.ownertype,
           'OWNER name' : owner['OwnerName1'],
           'OWNER address' : owner['OwnerAddress'],
-          'OWNER zip' : owner['Owner Zip'],
+          'OWNER zip' : owner['OwnerZip'],
           'voter name': `${voter['name_prefix'] ? `${voter['name_prefix']} ` : ''}${voter['name_first']}${voter['name_middle'] ? ` ${voter['name_middle']}` : '' }${voter['name_last'] ? ` ${voter['name_last']}` : ''}${voter['name_suffix'] ? ` ${voter['name_suffix']}` : ''}`,
           'voter address': `${voter['house_number']}${voter['house_fraction'] ? ` ${voter['house_fraction']}` : ''}${voter['pre_dir'] ? ` ${voter['pre_dir']}` : ''}${voter['street'] ? ` ${voter['street']}` : ''}${voter['type'] ? ` ${voter['type']}` : ''}${voter['post_dir'] ? ` ${voter['post_dir']}` : ''}${voter['building_number'] ? ` ${voter['building_number']}` : ''}${voter['apartment_number'] ? ` ${voter['apartment_number']}` : ''}`,
           'voter zip': voter['zip'],
-          'voter "mail_street"': voter['mail_street'],
-          'voter "mail_zip"': voter['mail_zip'],
+          'voter mail_street': voter['mail_street'],
+          'voter mail_zip': voter['mail_zip'],
           'voter phone 1': voter['phone_1'],
           'voter phone 2': voter['phone_2'],
           'voter id': voter['voter_id'],
@@ -121,15 +121,15 @@ for (const owner of owners) {
   }
 }
 
-const sortedOwnerVoterInfo = ownerVoterInfo.sort((a, b) => {
-  function entryPriority(entry) {
-    switch (entry['match confidence']) {
-      case 'full name and address': return 2;
-      case 'last name and address': return 1;
-      default: return 0;
-    }
+function entryPriority(entry) {
+  switch (entry['match confidence']) {
+    case 'full name and address': return 2;
+    case 'last name and address': return 1;
+    default: return 0;
   }
+}
 
+const sortedOwnerVoterInfo = ownerVoterInfo.sort((a, b) => {
   return entryPriority(b) - entryPriority(a);
 });
 
